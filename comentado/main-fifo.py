@@ -3,8 +3,6 @@ def executar_fifo(sequencia, quadros):
     #declaração de variáveis
     indice_mais_antigo = 0
     cache = []
-    acertos = 0
-    falhas = 0
     historico = []
 
     #loop que percorre cada endereço na sequência
@@ -19,12 +17,10 @@ def executar_fifo(sequencia, quadros):
 
         #se o endereço já está no cache, é um acerto e a sequência permanece a mesma
         if endereco in cache:
-            acertos += 1
             estado['resultado'] = 'ACERTO'
             estado['cache_depois'] = cache.copy()
         else:
             #se não, é uma falha e o novo endereço é adicionado
-            falhas += 1
             estado['resultado'] = 'FALHA'
 
             #se estiver faltando espaço para completar os 8 quadros, 
@@ -42,7 +38,7 @@ def executar_fifo(sequencia, quadros):
         #adiciona o estado atual ao histórico
         historico.append(estado)
 
-    return acertos, falhas, historico
+    return historico
 
 #declaração das sequências que vão ser testadas
 sequencia_a = [4, 3, 25, 8, 19, 6, 25, 8, 16, 35, 45, 22, 8, 3, 16, 25, 7]
@@ -56,7 +52,7 @@ sequencias = [sequencia_a, sequencia_b, sequencia_c]
 #loop para exibição dos resultados
 for i in range(3):
     print(f"\nSequência {i + 1}:")
-    acertos, falhas, historico = executar_fifo(sequencias[i], 8)
+    historico = executar_fifo(sequencias[i], 8)
 
     print("Passo | Endereço | Cache | Resultado")
     print("-" * 60)

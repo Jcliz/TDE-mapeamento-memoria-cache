@@ -1,8 +1,6 @@
 def executar_fifo(sequencia, quadros):
     indice_mais_antigo = 0
     cache = []
-    acertos = 0
-    falhas = 0
     historico = []
 
     for endereco in sequencia:
@@ -14,11 +12,9 @@ def executar_fifo(sequencia, quadros):
         }
 
         if endereco in cache:
-            acertos += 1
             estado['resultado'] = 'ACERTO'
             estado['cache_depois'] = cache.copy()
         else:
-            falhas += 1
             estado['resultado'] = 'FALHA'
 
             if len(cache) < quadros:
@@ -31,7 +27,7 @@ def executar_fifo(sequencia, quadros):
 
         historico.append(estado)
 
-    return acertos, falhas, historico
+    return historico
 
 
 sequencia_a = [4, 3, 25, 8, 19, 6, 25, 8, 16, 35, 45, 22, 8, 3, 16, 25, 7]
@@ -42,7 +38,7 @@ sequencias = [sequencia_a, sequencia_b, sequencia_c]
 
 for i in range(3):
     print(f"\nSequência {i + 1}:")
-    acertos, falhas, historico = executar_fifo(sequencias[i], 8)
+    historico = executar_fifo(sequencias[i], 8)
 
     print("Passo | Endereço | Cache | Resultado")
     print("-" * 60)
