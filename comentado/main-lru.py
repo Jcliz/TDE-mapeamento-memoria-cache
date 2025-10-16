@@ -10,7 +10,6 @@ def executar_lru(sequencia, quadros):
         #dicionário que armazena o estado atual do cache
         estado = {
             'endereco': endereco,
-            'cache_antes': cache.copy(),
             'resultado': '',
             'cache_depois': []
         }

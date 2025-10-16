@@ -6,7 +6,6 @@ def executar_lru(sequencia, quadros):
     for endereco in sequencia:
         estado = {
             'endereco': endereco,
-            'cache_antes': cache.copy(),
             'resultado': '',
             'cache_depois': []
         }
